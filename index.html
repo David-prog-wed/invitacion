@@ -94,6 +94,13 @@
         color: #c71585;
       }
 
+      #cuenta-regresiva.finalizado {
+        /* Nueva regla para el mensaje final */
+        font-family: "Dancing Script", cursive;
+        font-size: 3em;
+        color: #c71585;
+      }
+
       .angelito-izquierda {
         position: absolute;
         top: 10px;
@@ -118,7 +125,6 @@
       .fa-map-marked-alt,
       .fa-whatsapp,
       .fa-clock {
-        /* Añadido para el ícono de hora */
         margin-right: 5px;
       }
 
@@ -153,10 +159,9 @@
         margin-right: 10px;
       }
 
-      /* Estilos para la recepción */
       .recepcion {
-        font-family: "Dancing Script", cursive; /* Fuente para la recepción */
-        line-height: 1.8; /* Interlineado para la recepción */
+        font-family: "Dancing Script", cursive;
+        line-height: 1.8;
       }
     </style>
   </head>
@@ -208,7 +213,7 @@
         <p><b>Recepción:</b> Manarola pub</p>
         <div class="recepcion">
           <p><b>Detalles de la recepción:</b></p>
-          <p>Karrera 12 # 75B - 16 Sur</p>
+          <p>Karrera 12 # 75b - 16 Sur</p>
           <a class="boton" href="https://maps.app.goo.gl/yh2p37zTq7oqgaPV6">
             <i class="fas fa-map-marked-alt"></i> Ver mapa
           </a>
@@ -248,18 +253,24 @@
         const ahora = new Date().getTime();
         const diferencia = fechaBautizo - ahora;
 
-        const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-        const horas = Math.floor(
-          (diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-        );
-        const minutos = Math.floor(
-          (diferencia % (1000 * 60 * 60)) / (1000 * 60)
-        );
-        const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+        if (diferencia <= 0) {
+          const cuentaRegresiva = document.getElementById("cuenta-regresiva");
+          cuentaRegresiva.innerHTML = "¡Feliz día del bautizo!";
+          cuentaRegresiva.classList.add("finalizado");
+        } else {
+          const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+          const horas = Math.floor(
+            (diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          );
+          const minutos = Math.floor(
+            (diferencia % (1000 * 60 * 60)) / (1000 * 60)
+          );
+          const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
 
-        document.getElementById(
-          "cuenta-regresiva"
-        ).innerHTML = `Faltan: ${dias}d ${horas}h ${minutos}m ${segundos}s`;
+          document.getElementById(
+            "cuenta-regresiva"
+          ).innerHTML = `Faltan: ${dias}d ${horas}h ${minutos}m ${segundos}s`;
+        }
       }
 
       setInterval(actualizarCuentaRegresiva, 1000);
