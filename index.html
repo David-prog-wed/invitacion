@@ -249,7 +249,7 @@
 
     <script>
       function actualizarCuentaRegresiva() {
-        const fechaBautizo = new Date("2025-01-19T09:00:00").getTime();
+        const fechaBautizo = new Date("2025-01-19T09:00:00-05:00").getTime();
         const ahora = new Date().getTime();
         const diferencia = fechaBautizo - ahora;
 
@@ -258,7 +258,7 @@
           cuentaRegresiva.innerHTML = "¡Feliz día del bautizo!";
           cuentaRegresiva.classList.add("finalizado");
         } else {
-          const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+          const dias = Math.ceil(diferencia / (1000 * 60 * 60 * 24));
           const horas = Math.floor(
             (diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
           );
